@@ -26,8 +26,8 @@ switch(category) {
         break;
 
     case 'song':
-        //getSong();
-        console.log('music!')
+        getSong();
+        //console.log('music!')
         break;
 
     default: break;
@@ -82,9 +82,53 @@ function getConcert() {
         console.log(err);
     })
 }
-/*
+
 function getSong() {
 
+    var spotify = new Spotify(keys.spotify);
+
+    spotify.search({type: 'track', query: userSearch}, (err, data) => {
+        if (err) {
+            return console.log('Error' + err);
+        }
+
+        var better = data.tracks.items;
+
+        var sendToFile = {
+            one: one,
+            two: two,
+            three: three
+        }
+
+        for (e in better) {
+
+            for (e in better){
+            var one = `Artist Name: ${better[e].album.artists[0].name}`;
+            var two = `Album Name: ${better[e].album.name}`;
+            var three = `Released date: ${moment(better[e].album.release_date).format("MM-DD-YYYY")}`;    
+            console.log(`Artist Name: ${better[e].album.artists[0].name}`);
+            console.log(`Album Name: ${better[e].album.name}`);
+            console.log(`Released date: ${moment(better[e].album.release_date).format("MM-DD-YYYY")}`);
+            console.log("");
+            var sendToFile = {
+                one: one,
+                two: two,
+                three: three
+            }
+        }
+
+
+        fs.appendFile('spotifyInfo.txt', JSON.stringify(sendToFile)+os.EOL, (err) => {
+
+            if (err) {
+                return console.log(err);
+            }
+
+            console.log('its working!!!!!');
+        })
+        
+    })
 }
-*/
+
+
 
